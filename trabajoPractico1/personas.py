@@ -39,7 +39,7 @@ def generar_matriz_personas(cantidad: int):
     apellidos = ["garcía","lópez","martínez","pérez","rodríguez","sánchez","ramírez","torres","gómez","fernández"]
     matriz_personas = [["id","nombre","apellido"]]
     for i in range(cantidad):
-        matriz_personas.append([len(matriz_personas)-1, f"{random.choice(nombres)}", f"{random.choice(apellidos)}"])
+        matriz_personas.append([len(matriz_personas), f"{random.choice(nombres)}", f"{random.choice(apellidos)}"])
     return matriz_personas
 
 '''

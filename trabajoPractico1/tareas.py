@@ -62,7 +62,7 @@ Retorno: Matriz con las tareas y sus fechas límite.
 def generar_matriz_tareas(cantidad):
     tareas = [["id", "descripción", "fecha límite"]]
     for i in range(cantidad):
-        tareas.append([len(tareas)-1, generar_tarea(), generar_fecha()])
+        tareas.append([len(tareas), generar_tarea(), generar_fecha()])
     return tareas
 
 '''
