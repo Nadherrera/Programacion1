@@ -29,7 +29,7 @@ for fila in matriz:
     print(fila)
 print()
 
-personas.crear_persona(matriz, "Diego", "Nicolaisen")
+personas.crear_persona(matriz, "Diego3", "Nicolaisen")
 
 for fila in matriz:
     print(fila)

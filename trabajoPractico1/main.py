@@ -15,5 +15,5 @@ funciones_propias.imprimir_matriz(matriz_tareas)
 print()
 
 print("Matriz de las tareas:")
-funciones_propias.imprimir_matriz(matriz_tareas, matriz_personas)
+funciones_propias.imprimir_matriz(matriz_tareas)
 print()
