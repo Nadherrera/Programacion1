@@ -35,13 +35,12 @@ def validar_fecha(fecha: datetime.date):
 Descripción: Genera una tarea aleatoria a petición.
 Retorno: String con la descripción de una tarea aleatoria
 '''
-def generar_tarea():
-    acciones = ["escribir","revisar","organizar","preparar","investigar","analizar","completar","documentar","presentar","validar"]
-    objetos = ["el informe","el proyecto","el plan","la propuesta","el documento","el esquema","la base de datos","el artículo","el gráfico","el diagrama"]
-    contextos = ["en la oficina","para el cliente","con el equipo","en línea","para el jefe","en la reunión","antes del plazo","en el sistema","durante el viaje","en el servidor"]
-    
-    tarea = f"{random.choice(acciones)} {random.choice(objetos)} {random.choice(contextos)}"
-    return tarea
+acciones = ["escribir","revisar","organizar","preparar","investigar","analizar","completar","documentar","presentar","validar"]
+objetos = ["el informe","el proyecto","el plan","la propuesta","el documento","el esquema","la base de datos","el artículo","el gráfico","el diagrama"]
+contextos = ["en la oficina","para el cliente","con el equipo","en línea","para el jefe","en la reunión","antes del plazo","en el sistema","durante el viaje","en el servidor"]
+ 
+generar_tarea = lambda: f"{random.choice(acciones)} {random.choice(objetos)} {random.choice(contextos)}"
+ 
 
 '''
 Descripción: Generea una fecha aleatoria entre los 15 días anteriores y los 60 días posteriores a la actualidad.
@@ -59,10 +58,21 @@ def generar_fecha():
 Descripción: Genera una matriz con una cantidad solicitada de tareas, y sus fechas límite.
 Retorno: Matriz con las tareas y sus fechas límite.
 '''
+
+'''
+Descripción: Genera una matriz con una cantidad solicitada de tareas, sus fechas límite y un estado aleatorio.
+Retorno: Matriz con las tareas, sus fechas límite y el estado en que se encuentra.
+'''
 def generar_matriz_tareas(cantidad):
-    tareas = [["id", "descripción", "fecha límite"]]
+    tareas = [["id", "descripción", "fecha límite", "estado"]]
+    estados = ["pendiente", "en proceso", "finalizada"]
     for i in range(cantidad):
-        tareas.append([len(tareas), generar_tarea(), generar_fecha()])
+
+        tarea = generar_tarea()
+        fecha_limite = generar_fecha()
+        estado = estados[random.randint(0, 2)]
+
+        tareas.append([len(tareas), tarea, fecha_limite, estado])
     return tareas
 
 '''
@@ -95,3 +105,24 @@ def eliminar_tarea(matriz: list, id: str):
     id_valido, posicion = funciones_propias.validar_id(matriz, id)
     if validar_matriz_tareas(matriz) and id_valido:
         del matriz[posicion]
+
+'''
+Descripción: La función bsca tareas en la matriz según el rango de fechas que el usuario indica
+Retorno:
+'''
+def buscar_tareas_por_fecha(matriz, fecha_inicio, fecha_fin):
+    if not validar_matriz_tareas(matriz):
+        print("La matriz de tareas no es válida.")
+        return []
+    fecha_inicio_valida, fecha_inicio_corregida = validar_fecha(fecha_inicio)
+    fecha_fin_valida, fecha_fin_corregida = validar_fecha(fecha_fin)
+    if not (fecha_inicio_valida and fecha_fin_valida):
+        print("Una o ambas fechas ingresadas son inválidas.")
+        return []
+    tareas_rango = []
+    for tarea in matriz[1:]:
+        fecha_tarea = tarea[2]
+        if fecha_inicio_corregida <= fecha_tarea <= fecha_fin_corregida:
+            tareas_rango.append(tarea)
+    tareas_rango = sorted(tareas_rango, key=lambda x: x[2])
+    return tareas_rango
