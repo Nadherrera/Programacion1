@@ -21,10 +21,11 @@ Descripción: Verifica si un nombre completo es válido o no. De no serlo, los s
 Retorno: un string par el nombre y un string para el apellido.
 '''
 def validar_nombre_completo(nombre: str,apellido: str):
-    while not nombre.isalpha() or not apellido.isalpha():
-        if not nombre.isalpha():
+    es_valido = lambda x: x.isalpha()
+    while not es_valido(nombre) or not es_valido(apellido):
+        if not es_valido(nombre):
             nombre = str(input("El nombre ingresado contiene carácteres inválidos. Por favor, ingrese el nombre nuevamente: "))
-        elif not apellido.isalpha():
+        elif not es_valido(apellido):
             apellido = str(input("El apellido ingresado contiene carácteres inválidos. Por favor, ingrese el nombre nuevamente: "))
     return nombre, apellido
 

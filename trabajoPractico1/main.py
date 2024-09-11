@@ -16,5 +16,11 @@ print("Matriz de las tareas:")
 funciones_propias.imprimir_matriz(matriz_tareas)
 print()
 
+<<<<<<< HEAD
 print("Matriz de las asignaciones:")
 funciones_propias.imprimir_matriz(matriz_asignaciones)
+=======
+print("Matriz de las tareas:")
+funciones_propias.imprimir_matriz(matriz_tareas)
+print()
+>>>>>>> upstream/main
